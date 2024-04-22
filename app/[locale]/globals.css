@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'react-toastify/dist/ReactToastify.css';
+@import 'react-calendar/dist/Calendar.css';
+
+@layer components {
+  body {
+    @apply bg-background;
+  }
+
+  .input {
+    @apply bg-background text-sm placeholder:text-textColor dark:placeholder:text-white;
+    @apply block w-full rounded-[10px] outline-none;
+    @apply h-12 px-5 py-[10px] md:px-8 md:py-4 lg:h-11;
+  }
+
+  .input-border {
+    @apply border border-borderColor;
+  }
+
+  .input-icon {
+    @apply absolute inset-y-0 flex flex-shrink-0 cursor-pointer items-center;
+    @apply absolute inset-y-0 flex flex-shrink-0 cursor-pointer items-center;
+  }
+
+  .label {
+    @apply mb-1 cursor-pointer text-lg font-medium;
+  }
+
+  .btn {
+    @apply flex cursor-pointer items-center justify-center gap-2 focus:outline-none;
+    @apply h-9 md:h-11;
+    @apply px-4 py-0 md:px-5;
+  }
+
+  .Toastify__toast .Toastify__toast-theme--light .Toastify__toast--error {
+    @apply !bg-red-500;
+  }
+
+  ::-ms-reveal,
+  ::-ms-clear {
+    display: none;
+  }
+
+  /* Calendar */
+  .react-calendar {
+    @apply w-full min-w-60 rounded-lg border-none p-2 text-textColor sm:min-w-96 md:min-w-[450px] md:p-4;
+
+    .react-calendar__tile:disabled {
+      @apply bg-[unset] text-subTextColor;
+    }
+    .react-calendar__tile:enabled:hover,
+    .react-calendar__tile:enabled:focus {
+      @apply bg-primary text-white transition duration-300;
+    }
+    .react-calendar__month-view__days {
+      @apply gap-0;
+    }
+    .react-calendar__navigation__arrow {
+      @apply flex items-center justify-center;
+    }
+    .react-calendar__navigation__label {
+      @apply pointer-events-none flex items-center justify-around;
+    }
+    .react-calendar__navigation button:enabled:hover,
+    .react-calendar__navigation button:enabled:focus {
+      @apply rounded-full bg-blue-100;
+    }
+    .react-calendar__month-view__weekdays__weekday abbr {
+      @apply no-underline;
+    }
+    .react-calendar__tile--now {
+      @apply bg-secondary text-white;
+    }
+  }
+  input[type='range']::-webkit-slider-thumb {
+    @apply h-5 w-5 cursor-pointer appearance-none rounded-full bg-primary p-1 shadow-[0_0_0_5px_#fff] transition;
+  }
+
+  /* Style scrollbar */
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 5px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #3563e9;
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #54a6ff;
+  }
+}
