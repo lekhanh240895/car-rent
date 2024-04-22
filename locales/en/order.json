@@ -1,0 +1,20 @@
+{
+  "document_title": "Orders",
+  "order_list_title": "Order List",
+  "name_car": "Name Car",
+  "car_type": "Car Type",
+  "payment_date": "Payment Date",
+  "payment_method": "Payment Method",
+  "order_details": "Order Details",
+  "total_rental_days": "Total rental days",
+  "tax": "Tax",
+  "discounts": "Discounts",
+  "total": "Total",
+  "billing_information": "Billing Information",
+  "download_title": "Download",
+  "status": "Status",
+  "rental_confirmation": "Car rental confirmation",
+  "order_list_empty": "You don't have any order history yet",
+  "pick_up": "Pick - Up",
+  "drop_off": "Drop - Off"
+}

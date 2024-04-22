@@ -1,0 +1,20 @@
+{
+  "document_title": "Đơn đặt hàng",
+  "order_list_title": "Danh sách đặt hàng",
+  "name_car": "Tên xe",
+  "car_type": "Loại xe",
+  "payment_date": "Ngày thanh toán",
+  "payment_method": "Phương thức thanh toán",
+  "order_details": "Chi tiết đặt hàng",
+  "total_rental_days": "Tổng số ngày thuê",
+  "tax": "Thuế",
+  "discounts": "Giảm giá",
+  "total": "Tổng cộng",
+  "billing_information": "Thông tin thanh toán",
+  "download_title": "Tải xuống",
+  "status": "Trạng thái",
+  "rental_confirmation": "Xác nhận thuê xe",
+  "order_list_empty": "Bạn chưa có lịch sử đặt hàng nào",
+  "pick_up": "Ngày nhận",
+  "drop_off": "Ngày trả"
+}

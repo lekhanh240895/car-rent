@@ -1,0 +1,102 @@
+{
+  "detail": {
+    "reviewer_title": "Reviewer",
+    "type_car_title": "Type Car",
+    "capacity_people_title": "People",
+    "capacity_person_title": "Person"
+  },
+  "filter": {
+    "max_title": "Max",
+    "date_title": "Date",
+    "time_title": "Time",
+    "type_title": "Type",
+    "clear_title": "Clear filters",
+    "price_title": "Price",
+    "submit_title": "Search",
+    "pick_up_title": "Pick - Up",
+    "capacity_title": "Capacity",
+    "drop_off_title": "Drop - Off",
+    "location_title": "Locations",
+    "steering_title": "Steering",
+    "gasonline_title": "Gasoline",
+    "select_date_title": "Select your date",
+    "select_location_title": "Select your city"
+  },
+  "footer": {
+    "about": {
+      "title": "About",
+      "points": {
+        "0": "How it works",
+        "1": "Featured",
+        "2": "Partnership",
+        "3": "Bussiness Relation\n"
+      }
+    },
+    "rights": "All rights reserved",
+    "vision": "Our vision is to provide convenience and help increase your sales business.",
+    "socials": {
+      "title": "Socials"
+    },
+    "community": {
+      "title": "Community",
+      "points": {
+        "0": "Events",
+        "1": "Blog",
+        "2": "Podcast",
+        "3": "Invite a friend\n"
+      }
+    }
+  },
+  "header": {
+    "login_title": "Login",
+    "logout_title": "Log out",
+    "language_title": "Language",
+    "register_title": "Register",
+    "search_field_placeholder": "Search something here"
+  },
+  "search": {
+    "no_results": "No results found.",
+    "find_car_title": "Find Car",
+    "update_button_title": "Update"
+  },
+  "car_title": "Car",
+  "name_field": "Full Name",
+  "email_field": "Email",
+  "error_messages": {
+    "timeout": "Timeouts occurred and data could not be obtained.",
+    "max_length": "[{{field}}] must not exceed {{number}} characters",
+    "min_length": "[{{field}}] must be at least {{number}} characters",
+    "unknown_error": "An unexpected error occurred. Please try again or contact the administrator.",
+    "field_required": "[{{field}}] is required. Please enter.",
+    "not_found_title": "404 Not Found",
+    "session_expired": "Your session has expired or is invalid. Please log in again to continue.",
+    "invalid_email_format": "Invalid email format",
+    "terms_check_required": "You must accept the terms and policy",
+    "not_found_description": "Sorry, the page you are looking for could not be found.",
+    "passwords_do_not_match": "Confirm password do not match",
+    "invalid_password_format": "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit",
+    "city_required": "[Town / City] is required. Please enter.",
+    "paypal_notify": "Please check your information to continue",
+    "rental_summary_required": "Please select a pick-up date and drop-off date before performing this action.",
+    "get_orders_failed": "There is an issue retrieving the order history.",
+    "try_again": "Try again",
+    "fetch_exception": "Server Error: There is an issue retrieving the {{name}}."
+  },
+  "password_field": "Password",
+  "view_all_title": "View All",
+  "price_day_title": "day",
+  "show_more_title": "Show more car",
+  "rent_button_title": "Rent Now",
+  "recommend_car_title": "Recommendation Car",
+  "confirm_password_field": "Confirm Password",
+  "name_field_placeholder": "Enter your username",
+  "email_field_placeholder": "Enter your email",
+  "password_field_placeholder": "Enter your password",
+  "confirm_password_field_placeholder": "Enter your confirm password",
+  "orders_history": "Orders history",
+  "car_detail": "Car Detail",
+  "filter_tags": "Filter Tags",
+  "car_reviews": "Car Reviews",
+  "go_to_homepage": "Go to homepage",
+  "change_theme": "Change theme"
+}
