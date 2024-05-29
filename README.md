@@ -87,3 +87,15 @@ CREATE TABLE car_rental (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 ```
+
+# For testing purposes
+
+curl -X POST -H "Content-Type: application/json" -d '{"email": "ema1@example.com", "password": "Rimdaica123", "confirm_password": "Rimdaica123", "full_name": "User 1"}' http://localhost:3000/api/v1/auth/register
+
+curl -X POST -H "Content-Type: application/json" -d '{"email": "ema2@example.com", "password": "Rimdaica123", "confirm_password": "Rimdaica123", "full_name": "User 2"}' http://localhost:3000/api/v1/auth/register
+
+curl -X POST -H "Content-Type: application/json" -d '{"email": "ema3@example.com", "password": "Rimdaica123", "confirm_password": "Rimdaica123", "full_name": "User 3"}' http://localhost:3000/api/v1/auth/register
+
+curl -X POST -H "Content-Type: application/json" -d '{"email": "ema4@example.com", "password": "Rimdaica123", "confirm_password": "Rimdaica123", "full_name": "User 4"}' http://localhost:3000/api/v1/auth/register
+
+curl -X POST -H "Content-Type: application/json" -d '{"email": "ema5@example.com", "password": "Rimdaica123", "confirm_password": "Rimdaica123", "full_name": "User 5"}' http://localhost:3000/api/v1/auth/register

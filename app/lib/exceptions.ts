@@ -157,6 +157,14 @@ export class ApiError extends Error {
     return new ApiError('PA-0002', 'Payment error', 'Transaction failed.');
   }
 
+  static fromSentEmail() {
+    return new ApiError(
+      'RE-0002',
+      'Sending email error',
+      'Failed to send email.'
+    );
+  }
+
   static fromUnexpected(): ApiError {
     return new ApiError(
       'US-0500',

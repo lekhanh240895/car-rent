@@ -17,6 +17,105 @@ import {
   MAILTRAP_PORT,
   MAILTRAP_USER
 } from '@/app/lib/constants';
+import Queue from 'bull';
+import redis from '@/app/lib/redis';
+
+export async function POST(req: Request) {
+  const { email, password, confirm_password, full_name } = await req.json();
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const lang = headers().get('Accept-Language') || 'en';
+  const { t } = await initTranslations(lang, ['common']);
+
+  try {
+    await registerSchema(t).validate(
+      {
+        email,
+        password,
+        confirm_password,
+        full_name
+      },
+      {
+        abortEarly: false
+      }
+    );
+  } catch (error: any) {
+    if (error instanceof yup.ValidationError) {
+      const apiError = ApiError.fromYupError(error, 'RE-002');
+      return handleError(apiError, 400);
+    } else {
+      const apiError = ApiError.fromUnexpected();
+      return handleError(apiError, 500);
+    }
+  }
+
+  const { rows } =
+    await sql`SELECT EXISTS(SELECT 1 FROM users WHERE email = ${email})`;
+
+  if (rows[0].exists) {
+    const apiError = ApiError.fromEmailExists();
+    return handleError(apiError, 400);
+  }
+
+  const { rows: users } = await sql`
+    INSERT INTO users (email, full_name, password)
+    VALUES (${email}, ${full_name}, ${hashedPassword})
+    RETURNING *;
+  `;
+
+  const user = users[0];
+
+  const register_token = generateRegisterToken(user.id);
+  await saveRegisterTokenToDatabase(user.id, register_token);
+
+  const transporter = nodemailer.createTransport({
+    host: MAILTRAP_HOST,
+    port: Number(MAILTRAP_PORT),
+    auth: {
+      user: MAILTRAP_USER,
+      pass: MAILTRAP_PASSWORD
+    }
+  });
+
+  const emailQueue = new Queue('sendEmail', {
+    createClient: function (type) {
+      switch (type) {
+        case 'client':
+          return redis;
+        case 'subscriber':
+          return redis.duplicate();
+        default:
+          return redis;
+      }
+    }
+  });
+
+  emailQueue.process(async (job) => {
+    try {
+      const { to, html } = job.data;
+      await transporter.sendMail({
+        from: '"Car Rent Team" <morent@car-rent.com>',
+        to,
+        subject: 'Account Registration Verification',
+        text: 'Thank you for registering with us! Please use the following link to verify your account:',
+        html
+      });
+    } catch (error) {
+      const apiError = ApiError.fromSentEmail();
+      return handleError(apiError, 500);
+    }
+  });
+
+  await emailQueue.add({
+    to: user.email,
+    html: mailContent(register_token, user.email)
+  });
+
+  return Response.json({
+    status_code: 201,
+    message: 'Success',
+    data: user
+  });
+}
 
 const registerSchema = (t: TFunction<[string, string], undefined>) => {
   return yup
@@ -95,75 +194,3 @@ const registerSchema = (t: TFunction<[string, string], undefined>) => {
     })
     .required();
 };
-
-export async function POST(req: Request) {
-  const { email, password, confirm_password, full_name } = await req.json();
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const lang = headers().get('Accept-Language') || 'en';
-  const { t } = await initTranslations(lang, ['common']);
-
-  try {
-    await registerSchema(t).validate(
-      {
-        email,
-        password,
-        confirm_password,
-        full_name
-      },
-      {
-        abortEarly: false
-      }
-    );
-  } catch (error: any) {
-    if (error instanceof yup.ValidationError) {
-      const apiError = ApiError.fromYupError(error, 'RE-002');
-      return handleError(apiError, 400);
-    } else {
-      const apiError = ApiError.fromUnexpected();
-      return handleError(apiError, 500);
-    }
-  }
-
-  const { rows } =
-    await sql`SELECT EXISTS(SELECT 1 FROM users WHERE email = ${email})`;
-
-  if (rows[0].exists) {
-    const apiError = ApiError.fromEmailExists();
-    return handleError(apiError, 400);
-  }
-
-  const { rows: users } = await sql`
-    INSERT INTO users (email, full_name, password)
-    VALUES (${email}, ${full_name}, ${hashedPassword})
-    RETURNING *;
-  `;
-
-  const user = users[0];
-
-  const transporter = nodemailer.createTransport({
-    host: MAILTRAP_HOST,
-    port: Number(MAILTRAP_PORT),
-    auth: {
-      user: MAILTRAP_USER,
-      pass: MAILTRAP_PASSWORD
-    }
-  });
-
-  const register_token = generateRegisterToken(user.id);
-  await saveRegisterTokenToDatabase(user.id, register_token);
-
-  // send mail with defined transport object
-  await transporter.sendMail({
-    from: '"Car Rent Team" <morent@car-rent.com>',
-    to: user.email,
-    subject: 'Account Registration Verification',
-    text: 'Thank you for registering with us! Please use the following link to verify your account:',
-    html: mailContent(register_token, user.email)
-  });
-
-  return Response.json({
-    status_code: 201,
-    message: 'Success',
-    data: user
-  });
-}

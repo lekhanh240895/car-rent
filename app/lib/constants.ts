@@ -23,3 +23,4 @@ export const MAILTRAP_HOST = process.env.MAILTRAP_HOST;
 export const MAILTRAP_PORT = process.env.MAILTRAP_PORT;
 export const MAILTRAP_USER = process.env.MAILTRAP_USER;
 export const MAILTRAP_PASSWORD = process.env.MAILTRAP_PASSWORD;
+export const UPSTASH_REDIS_PASSWORD = process.env.UPSTASH_REDIS_PASSWORD;
